@@ -166,14 +166,14 @@ def rezultat():
         ekran.insert(0,t)
         sporocilo.set("Si našel kar si iskal?")
     except ZeroDivisionError:
-        ekran.delete(0,'end')
         sporocilo.set("Deljenje z ničlo!")
     except SyntaxError:
-        ekran.delete(0,'end')
         sporocilo.set("Pazi na pravilen zapis!")
     except NameError:
-        ekran.delete(0,'end')
         sporocilo.set("To ne spada v kalkulator!")
+    except ValueError:
+        sporocilo.set("Uporabi naravno število")
+    ekran.delete(0,'end')
 
 gumb_rezultat = tkinter.Button(okvir2, text="=", command = rezultat,
                                height=2, width=10, cursor="heart", bg='khaki1')
