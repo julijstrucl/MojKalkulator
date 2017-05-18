@@ -94,14 +94,8 @@ gumb_vejica.grid(row=3,column=0)
 
 
 # funkcije
-def fakulteta(n):
-    if n%2==0 or n%2==1:
-        if n==0:
-            return 1
-        m=1
-        for i in range(n+1):
-            m = m*i
-        return m + stanje
+def fakulteta():
+    ekran.insert('end', 'math.factorial()')
 
 gumb_fakulteta = tkinter.Button(okvir1, text="n!", command = fakulteta,
                                height=2, width=3, bg='chartreuse')
@@ -146,6 +140,7 @@ gumb_mnozenje.grid(row=2, column=5)
 
 def deljenje():
     ekran.insert('end','/')
+    
 gumb_deljenje = tkinter.Button(okvir1, text="/", command = deljenje,
                                 height=2, width=3, bg='chartreuse')
 gumb_deljenje.grid(row=3, column=5)
@@ -154,7 +149,7 @@ gumb_deljenje.grid(row=3, column=5)
 #pojavno okno z informacijami (okvir1)
 from tkinter import messagebox
 def info():
-    messagebox.showinfo("Nekaj informacij", "R - resetira okno,gumb '?' vam dodeli naključno število med 1 in 1000 ")
+    messagebox.showinfo("Nekaj informacij", "'R' - resetira okno. Gumb '?' vam dodeli naključno število med 1 in 1000")
 gumb_info = tkinter.Button(okvir1, text="i",command = info,
                            height=2, width=3, bg='gold')
 gumb_info.grid(row=3,column=3)
@@ -163,11 +158,22 @@ gumb_info.grid(row=3,column=3)
 #rezultat in reset => okvir2
 okvir2 = tkinter.Frame(okno)
 okvir2.pack()
+
 def rezultat():
-    t = eval(ekran.get())
-    ekran.delete(0,'end')
-    ekran.insert(0,t)
-    sporocilo.set("Si našel kar si iskal?")
+    try:
+        t = eval(ekran.get())
+        ekran.delete(0,'end')
+        ekran.insert(0,t)
+        sporocilo.set("Si našel kar si iskal?")
+    except ZeroDivisionError:
+        ekran.delete(0,'end')
+        sporocilo.set("Deljenje z ničlo!")
+    except SyntaxError:
+        ekran.delete(0,'end')
+        sporocilo.set("Pazi na pravilen zapis!")
+    except NameError:
+        ekran.delete(0,'end')
+        sporocilo.set("To ne spada v kalkulator!")
 
 gumb_rezultat = tkinter.Button(okvir2, text="=", command = rezultat,
                                height=2, width=10, cursor="heart", bg='khaki1')
@@ -190,10 +196,7 @@ sporocilo.set("Preizkusi me!")
 opomba = tkinter.Label(okvir3, textvariable=sporocilo)
 opomba.pack()
 
-#naredi sporočila za napake pri racunanju!!!
 
-# ali za ekran uporabiti ENTRY ali Lable?? In kako uvesti računske funkcije
-# v entry??? - nevermind!!!
 okno.mainloop()
 
 
