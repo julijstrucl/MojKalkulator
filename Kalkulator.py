@@ -2,16 +2,17 @@ import tkinter
 
 okno = tkinter.Tk()
 okno.wm_title("MojKalkulator")
+
+#-------------------------okvir0-----------------------------------
 #ekran => okvir0
 
 okvir0 = tkinter.Frame(okno)
 okvir0.pack()
-
 ekran = tkinter.Entry(okvir0)
 ekran.pack()
 ekran.insert(0,'')
 
-
+#-------------------------okvir1-----------------------------------
 #številčnica => okvir1
 okvir1 = tkinter.Frame(okno)
 okvir1.pack()
@@ -76,6 +77,22 @@ gumb0 = tkinter.Button(okvir1, text="0",command = nic,
                        height=2, width=3, bg='sky blue')
 gumb0.grid(row=3,column=1)
 
+#naključno število
+import random
+def nakljucno():
+    ekran.insert('end', random.randrange(1,1000))
+gumb_nakljucno = tkinter.Button(okvir1, text="?",command = nakljucno,
+                       height=2, width=3, bg='sky blue')
+gumb_nakljucno.grid(row=3,column=2)
+
+# decimalna vejica
+def vejica():
+    ekran.insert('end','.')
+gumb_vejica = tkinter.Button(okvir1, text=",",command = vejica,
+                       height=2, width=3, bg='sky blue')
+gumb_vejica.grid(row=3,column=0)
+
+
 # funkcije
 def fakulteta(n):
     if n%2==0 or n%2==1:
@@ -88,56 +105,70 @@ def fakulteta(n):
 
 gumb_fakulteta = tkinter.Button(okvir1, text="n!", command = fakulteta,
                                height=2, width=3, bg='chartreuse')
-gumb_fakulteta.grid(row=0, column=4)
+gumb_fakulteta.grid(row=0, column=3)
 
 
 import math
-def koren(n):
-    if n>=0:
-        return math.sqrt(n) + stanje 
+def koren():
+    ekran.insert('end', '**(0.5)')
 
 gumb_koren = tkinter.Button(okvir1, text="√", command = koren,
                             height=2, width=3, bg='chartreuse')
-gumb_koren.grid(row=1, column=4)
+gumb_koren.grid(row=1, column=3)
 
-def kvadrat(n):
-    return n**2 + stanje
-
+def kvadrat():
+    ekran.insert('end', '**2')
+    
 gumb_kvadrat = tkinter.Button(okvir1, text="nn", command = kvadrat,
                               height=2, width=3, bg='chartreuse')
-gumb_kvadrat.grid(row=2, column=4)
+gumb_kvadrat.grid(row=2, column=3)
 
 #splošne funkcije
 def sestevanje():
+    ekran.insert('end','+')
     sporocilo.set("A prvič uporabljaš kalkulator?")
+
 gumb_sestevanje = tkinter.Button(okvir1, text="+", command = sestevanje,
                                 height=2, width=3, bg='chartreuse')
 gumb_sestevanje.grid(row=0, column=5)
             
-def odstevanje(n):
-    return stanje - n
+def odstevanje():
+    ekran.insert('end','-')
 gumb_odstevanje = tkinter.Button(okvir1, text="-", command = odstevanje,
                                 height=2, width=3, bg='chartreuse')
 gumb_odstevanje.grid(row=1, column=5)
 
-def mnozenje(n):
-    return stanje * n
+def mnozenje():
+    ekran.insert('end','*')
 gumb_mnozenje = tkinter.Button(okvir1, text="x", command = mnozenje,
                                 height=2, width=3, bg='chartreuse')
 gumb_mnozenje.grid(row=2, column=5)
 
-def deljenje(n):
-    if n!=0:
-        return stanje / n
+def deljenje():
+    ekran.insert('end','/')
 gumb_deljenje = tkinter.Button(okvir1, text="/", command = deljenje,
                                 height=2, width=3, bg='chartreuse')
 gumb_deljenje.grid(row=3, column=5)
 
+
+#pojavno okno z informacijami (okvir1)
+from tkinter import messagebox
+def info():
+    messagebox.showinfo("Nekaj informacij", "R - resetira okno,gumb '?' vam dodeli naključno število med 1 in 1000 ")
+gumb_info = tkinter.Button(okvir1, text="i",command = info,
+                           height=2, width=3, bg='gold')
+gumb_info.grid(row=3,column=3)
+
+#---------------------------------okvir2--------------------------------
 #rezultat in reset => okvir2
 okvir2 = tkinter.Frame(okno)
 okvir2.pack()
 def rezultat():
-    return stanje
+    t = eval(ekran.get())
+    ekran.delete(0,'end')
+    ekran.insert(0,t)
+    sporocilo.set("Si našel kar si iskal?")
+
 gumb_rezultat = tkinter.Button(okvir2, text="=", command = rezultat,
                                height=2, width=10, cursor="heart", bg='khaki1')
 gumb_rezultat.grid(row=0, column=1)
@@ -150,7 +181,7 @@ gumb_reset = tkinter.Button(okvir2, text="R", command = reset,
 gumb_reset.grid(row=0, column=0)
 
 
-
+#-------------------------okvir3-------------------------------
 #lable => okvir3
 okvir3 = tkinter.Frame(okno)
 okvir3.pack()
@@ -159,13 +190,10 @@ sporocilo.set("Preizkusi me!")
 opomba = tkinter.Label(okvir3, textvariable=sporocilo)
 opomba.pack()
 
-
-
-
-
+#naredi sporočila za napake pri racunanju!!!
 
 # ali za ekran uporabiti ENTRY ali Lable?? In kako uvesti računske funkcije
-# v entry???
+# v entry??? - nevermind!!!
 okno.mainloop()
 
 
