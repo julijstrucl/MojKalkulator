@@ -8,7 +8,8 @@ okno.wm_title("MojKalkulator")
 
 okvir0 = tkinter.Frame(okno)
 okvir0.pack()
-ekran = tkinter.Entry(okvir0)
+ekran = tkinter.Entry(okvir0, justify='center',width=30)
+# + ,width=30 po moznosti
 ekran.pack()
 ekran.insert(0,'')
 
