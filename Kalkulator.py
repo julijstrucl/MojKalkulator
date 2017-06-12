@@ -119,7 +119,7 @@ gumb_koren.grid(row=1, column=3)
 def kvadrat():
     ekran.insert('end', '**2')
     
-gumb_kvadrat = tkinter.Button(okvir1, text="nn", command = kvadrat,
+gumb_kvadrat = tkinter.Button(okvir1, text="n^2", command = kvadrat,
                               height=2, width=3, bg='chartreuse')
 gumb_kvadrat.grid(row=2, column=3)
 
