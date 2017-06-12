@@ -95,12 +95,17 @@ gumb_vejica.grid(row=3,column=0)
 
 
 # funkcije
-def fakulteta():
-    ekran.insert('end', 'math.factorial()')
+def oklepaj(event):
+    ekran.insert('end', '(')
+def zaklepaj(event):
+    ekran.insert('end', ')')
 
-gumb_fakulteta = tkinter.Button(okvir1, text="n!", command = fakulteta,
+gumb_oklepaji = tkinter.Button(okvir1, text="( )",
                                height=2, width=3, bg='chartreuse')
-gumb_fakulteta.grid(row=0, column=3)
+
+gumb_oklepaji.bind('<Button-1>', oklepaj)
+gumb_oklepaji.bind('<Button-3>', zaklepaj)
+gumb_oklepaji.grid(row=0, column=3)
 
 
 import math
@@ -150,7 +155,9 @@ gumb_deljenje.grid(row=3, column=5)
 #pojavno okno z informacijami (okvir1)
 from tkinter import messagebox
 def info():
-    messagebox.showinfo("Nekaj informacij", "'R' - resetira okno. Gumb '?' vam dodeli naključno število med 1 in 1000")
+    messagebox.showinfo("Nekaj informacij", "'R' - resetira okno."
+                        "  Gumb '?' vam dodeli naključno število med 1 in 1000.  "
+                        "Z levim miškinim klikom na gumb '( )' vstavite oklepaj, z desnim pa zaklepaj." )
 gumb_info = tkinter.Button(okvir1, text="i",command = info,
                            height=2, width=3, bg='gold')
 gumb_info.grid(row=3,column=3)
