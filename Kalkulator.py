@@ -126,8 +126,7 @@ gumb_kvadrat.grid(row=2, column=3)
 #splošne funkcije
 def sestevanje():
     ekran.insert('end','+')
-    sporocilo.set("A prvič uporabljaš kalkulator?")
-
+    
 gumb_sestevanje = tkinter.Button(okvir1, text="+", command = sestevanje,
                                 height=2, width=3, bg='chartreuse')
 gumb_sestevanje.grid(row=0, column=5)
@@ -157,7 +156,8 @@ from tkinter import messagebox
 def info():
     messagebox.showinfo("Nekaj informacij", "'R' - resetira okno."
                         "  Gumb '?' vam dodeli naključno število med 1 in 1000.  "
-                        "Z levim miškinim klikom na gumb '( )' vstavite oklepaj, z desnim pa zaklepaj." )
+                        "Z levim miškinim klikom na gumb '( )' vstavite oklepaj,"
+                        "  z desnim pa zaklepaj." )
 gumb_info = tkinter.Button(okvir1, text="i",command = info,
                            height=2, width=3, bg='gold')
 gumb_info.grid(row=3,column=3)
@@ -181,9 +181,6 @@ def rezultat():
         ekran.delete(0,'end')
     except NameError:
         sporocilo.set("To ne spada v kalkulator!")
-        ekran.delete(0,'end')
-    except ValueError:
-        sporocilo.set("Uporabi naravno število")
         ekran.delete(0,'end')
 
 gumb_rezultat = tkinter.Button(okvir2, text="=", command = rezultat,
